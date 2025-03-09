@@ -1,0 +1,17 @@
+﻿<Window x:Class="UtilityApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UtilityApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Khởi tạo trình duyệt" Click="StartBrowser_Click" Width="200" Margin="5"/>
+            <Button Content="Đi đến Google" Click="NavigateGoogle_Click" Width="200" Margin="5"/>
+            <Button Content="Mở tab mới" Click="OpenNewTab_Click" Width="200" Margin="5"/>
+            <Button Content="Đóng trình duyệt" Click="CloseBrowser_Click" Width="200" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
