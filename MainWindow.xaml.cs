@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using UtilityApp.Services;
 
 namespace UtilityApp
 {
@@ -10,6 +11,12 @@ namespace UtilityApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void btnRunDemo_Click(object sender, RoutedEventArgs e)
+        {
+            var service = new PlaywrightFacebookService();
+            await service.LoginFacebookAsync("truongduong0402@gmail.com", "D@ngDuong04022002");
         }
     }
 }

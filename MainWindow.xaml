@@ -7,11 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Khởi tạo trình duyệt" Click="StartBrowser_Click" Width="200" Margin="5"/>
-            <Button Content="Đi đến Google" Click="NavigateGoogle_Click" Width="200" Margin="5"/>
-            <Button Content="Mở tab mới" Click="OpenNewTab_Click" Width="200" Margin="5"/>
-            <Button Content="Đóng trình duyệt" Click="CloseBrowser_Click" Width="200" Margin="5"/>
-        </StackPanel>
+        <Button x:Name="btnRunDemo" Content="Chạy Playwright Demo" 
+                Click="btnRunDemo_Click" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" />
     </Grid>
 </Window>
