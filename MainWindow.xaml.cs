@@ -16,7 +16,7 @@ namespace UtilityApp
         private async void btnRunDemo_Click(object sender, RoutedEventArgs e)
         {
             var service = new PlaywrightFacebookService();
-            await service.LoginFacebookAsync("truongduong0402@gmail.com", "D@ngDuong04022002");
+            //await service.LoginFacebookAsync("truongduong0402@gmail.com", "D@ngDuong04022002");
         }
     }
 }
