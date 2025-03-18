@@ -15,7 +15,7 @@ namespace UtilityApp.Services
         {
         }
 
-        public async Task<IBrowser> CreateBrowserAsync(BrowserOptions options = BrowserOptions.Chromium)
+        public async Task<IBrowser> CreateBrowserAsync(BrowserOptions options = BrowserOptions.Chromium, BrowserTypeLaunchOptions? browserTypeLaunchOptions = null)
         {
             var playwright = await PlaywrightInstance;
             switch (options)
@@ -24,6 +24,12 @@ namespace UtilityApp.Services
                     var chromePath = GetChromeExecutablePathFromRegistry();
                     if (!string.IsNullOrEmpty(chromePath))
                     {
+                        if(browserTypeLaunchOptions != null)
+                        {
+                            browserTypeLaunchOptions.ExecutablePath = chromePath;
+                            return await playwright.Chromium.LaunchAsync(browserTypeLaunchOptions);
+                        }
+
                         return await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
                         {
                             Headless = false,
@@ -56,6 +62,21 @@ namespace UtilityApp.Services
                 page = await CreateNewPageAsync();
             }
             await page.GotoAsync(url);
+        }
+
+
+        // TODO: 
+        public async Task ScreenshotAsync(IPage? page, bool isFullPage = false)
+        {
+            if (page == null)
+            {
+                page = await CreateNewPageAsync();
+            }
+
+            await page.ScreenshotAsync(new PageScreenshotOptions
+            {
+                FullPage = isFullPage
+            });
         }
 
         public async ValueTask DisposeAsync()

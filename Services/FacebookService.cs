@@ -2,11 +2,11 @@
 
 namespace UtilityApp.Services
 {
-    public class PlaywrightFacebookService
+    public class FacebookService
     {
         private readonly PlaywrightService _playwrightService;
 
-        public PlaywrightFacebookService()
+        public FacebookService()
         {
             _playwrightService = new PlaywrightService();
         }

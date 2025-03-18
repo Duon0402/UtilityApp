@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnRunDemo" Content="Chạy Playwright Demo" 
-                Click="btnRunDemo_Click" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" />
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="txtInput" Width="200" Height="30" Margin="5"/>
+            <Button x:Name="btnRunDemo" Content="Run Demo"
+                Click="btnRunDemo_Click"
+                Width="100" Height="30" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>
