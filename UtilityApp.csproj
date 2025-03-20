@@ -12,12 +12,15 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.12.0" />
     <PackageReference Include="Microsoft.Playwright" Version="1.50.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.3" />
+    <PackageReference Include="WindowsAPICodePack.Shell.CommonFileDialogs.Wpf" Version="1.1.5.1" />
+    <PackageReference Include="Xabe.FFmpeg" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Base\" />
     <Folder Include="Commands\" />
+    <Folder Include="EmbeddedResource\" />
     <Folder Include="Helpers\" />
     <Folder Include="Models\TikTok\" />
     <Folder Include="Resources\" />

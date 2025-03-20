@@ -6,12 +6,21 @@
         xmlns:local="clr-namespace:UtilityApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="txtInput" Width="200" Height="30" Margin="5"/>
-            <Button x:Name="btnRunDemo" Content="Run Demo"
-                Click="btnRunDemo_Click"
-                Width="100" Height="30" Margin="5"/>
+    <Grid Margin="10">
+        <StackPanel>
+            <Button Click="SelectVideo_Click">📂 Chọn Video</Button>
+            <TextBlock Name="VideoPath" Text="Chưa chọn video" TextWrapping="Wrap" Margin="5"/>
+
+            <Button Click="SelectFolder_Click">📁 Chọn Thư Mục Lưu</Button>
+            <TextBlock Name="SavePath" Text="Chưa chọn thư mục" TextWrapping="Wrap" Margin="5"/>
+
+            <ComboBox Name="FlipType" Margin="5">
+                <ComboBoxItem Content="Lật Ngang" IsSelected="True"/>
+                <ComboBoxItem Content="Lật Dọc"/>
+            </ComboBox>
+
+            <Button Click="FlipVideo_Click" Background="Green" Foreground="White">🔄 Lật Video</Button>
+            <TextBlock Name="Status" Foreground="Red" Text="Trạng thái: Chưa xử lý" Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>

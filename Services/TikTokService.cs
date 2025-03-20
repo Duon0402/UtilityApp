@@ -43,15 +43,36 @@ namespace UtilityApp.Services
                 // Nếu có ít nhất một thẻ <source>, sử dụng phần tử đầu tiên
                 if (sources.Count > 0)
                 {
-                    var videoUrl = await sources[0].EvaluateAsync<string>("el => el.src");
+                    var videoUrl = await sources[2].EvaluateAsync<string>("el => el.src");
                     Console.WriteLine($"🎯 Video URL: {videoUrl}");
 
                     if (!string.IsNullOrEmpty(videoUrl))
                     {
-                        // Tải dữ liệu video bằng HttpClient và lưu file
-                        var videoData = await _httpClient.GetByteArrayAsync(videoUrl);
-                        await File.WriteAllBytesAsync(savePath, videoData);
-                        Console.WriteLine($"✅ Video đã tải xong: {savePath}");
+                        try
+                        {
+                            using (HttpClient client = new HttpClient())
+                            {
+                                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+
+                                Console.WriteLine("📥 Đang tải video...");
+                                using (HttpResponseMessage response = await client.GetAsync(videoUrl, HttpCompletionOption.ResponseHeadersRead))
+                                {
+                                    response.EnsureSuccessStatusCode();
+
+                                    using (Stream contentStream = await response.Content.ReadAsStreamAsync(),
+                                                   fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true))
+                                    {
+                                        await contentStream.CopyToAsync(fileStream);
+                                    }
+                                }
+                            }
+
+                            Console.WriteLine($"✅ Video đã tải xong: {savePath}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"⚠️ Lỗi tải video: {ex.Message}");
+                        }
                     }
                     else
                     {
