@@ -8,8 +8,7 @@ namespace UtilityApp.Services
         public static async Task FlipVideoAsync(string inputPath, string outputPath, bool isHorizontal)
         {
             string flipFilter = isHorizontal ? "hflip" : "vflip";
-
-            string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmbeddedResource", "ffmpeg.exe");
+            string ffmpegPath = "D:/MyData/MyProjects/UtilityApp/EmbeddedResource/ffmpeg.exe";
 
             if (!File.Exists(ffmpegPath))
                 throw new FileNotFoundException($"Không tìm thấy ffmpeg.exe tại: {ffmpegPath}");
@@ -17,7 +16,7 @@ namespace UtilityApp.Services
             var processInfo = new ProcessStartInfo
             {
                 FileName = ffmpegPath,
-                Arguments = $"-i \"{inputPath}\" -vf \"{flipFilter}\" \"{outputPath}\"",
+                Arguments = $"-hwaccel auto -i \"{inputPath}\" -vf \"{flipFilter}\" -c:v libx264 -preset ultrafast -crf 18 -threads 4 \"{outputPath}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -28,6 +27,7 @@ namespace UtilityApp.Services
             {
                 process.Start();
                 await process.WaitForExitAsync();
+
                 if (process.ExitCode != 0)
                 {
                     string error = await process.StandardError.ReadToEndAsync();
@@ -35,5 +35,6 @@ namespace UtilityApp.Services
                 }
             }
         }
+
     }
 }
