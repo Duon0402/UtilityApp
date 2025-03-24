@@ -20,6 +20,9 @@
             </ComboBox>
 
             <Button Click="FlipVideo_Click" Background="Green" Foreground="White">🔄 Lật Video</Button>
+            <!-- Nút chuyển video thành audio -->
+            <Button Click="ConvertVideoToAudio_Click" Background="Blue" Foreground="White" Margin="5">🎵 Convert Video to Audio</Button>
+
             <TextBlock Name="Status" Foreground="Red" Text="Trạng thái: Chưa xử lý" Margin="5"/>
         </StackPanel>
     </Grid>

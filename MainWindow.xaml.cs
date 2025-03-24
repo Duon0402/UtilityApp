@@ -59,13 +59,34 @@ namespace UtilityApp
 
             string flipOption = (FlipType.SelectedItem as ComboBoxItem)?.Content.ToString();
             bool isHorizontal = flipOption == "Lật Ngang";
-
+            var videoPath = _videoPath;
             Status.Text = "⏳ Đang xử lý...";
             try
             {
                 string outputFile = Path.Combine(_saveFolder, $"Flipped_{Path.GetFileName(_videoPath)}");
                 await VideoService.FlipVideoAsync(_videoPath, outputFile, isHorizontal);
                 Status.Text = $"✅ Video đã lật thành công!\nLưu tại: {outputFile}";
+            }
+            catch (Exception ex)
+            {
+                Status.Text = $"❌ Lỗi: {ex.Message}";
+            }
+        }
+
+        private async void ConvertVideoToAudio_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_videoPath) || string.IsNullOrEmpty(_saveFolder))
+            {
+                Status.Text = "⚠️ Vui lòng chọn video và thư mục lưu!";
+                return;
+            }
+
+            string outputFile = Path.Combine(_saveFolder, $"Audio_{Path.GetFileNameWithoutExtension(_videoPath)}.mp3");
+            Status.Text = "⏳ Đang chuyển đổi video thành audio...";
+            try
+            {
+                await VideoService.ConvertVideoToAudio(_videoPath, outputFile);
+                Status.Text = $"✅ Đã chuyển video thành audio!\nLưu tại: {outputFile}";
             }
             catch (Exception ex)
             {
